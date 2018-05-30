@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  content: MyText
+  eventdate: 2018-05-28
+  recruitdate: 2018-05-28
+  weblink: MyString
+  user_id: 
+
+two:
+  title: MyString
+  content: MyText
+  eventdate: 2018-05-28
+  recruitdate: 2018-05-28
+  weblink: MyString
+  user_id: 
