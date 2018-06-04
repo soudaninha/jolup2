@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180529142708) do
+ActiveRecord::Schema.define(version: 20180601025032) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "content"
@@ -34,6 +34,14 @@ ActiveRecord::Schema.define(version: 20180529142708) do
 
   create_table "eventcates", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string   "alt"
+    t.string   "hint"
+    t.string   "file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

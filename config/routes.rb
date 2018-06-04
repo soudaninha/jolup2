@@ -1,17 +1,26 @@
 Rails.application.routes.draw do
+  get 'tinymce_assets/create'
 
+  root 'posts#index'
   get 'home/index'
 
   devise_for :users
   
   get '/new_notifications/read_all' => 'new_notifications#read_all'
+  post '/tinymce_assets' => 'tinymce_assets#create'
   
   resources :posts do
     resources :comments, only: [:create, :destroy]
+    # sunspot  
+    collection do
+      get :search
+    end
   end
   
+  get 'posts/search' => 'posts#search'
+  
   resources :new_notifications, only: [:index, :show, :create]
-  root 'posts#index'
+  
   
  resources :conversations, only: [:create] do
     member do
@@ -19,6 +28,7 @@ Rails.application.routes.draw do
     end
     resources :messages, only: [:create]
  end
+
 
   
 

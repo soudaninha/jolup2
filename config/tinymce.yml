@@ -1,5 +1,8 @@
 toolbar:
-  - styleselect | bold italic | undo redo | image | link
+  - styleselect | bold italic | table | uploadimage | undo redo
 plugins:
   - image
   - link
+  - table
+  - uploadimage
+# toolbar option must include "uploadimage" somewhere to have the button appear

@@ -2,11 +2,6 @@
 <h4>공모기한 : <%=@post.eventdate%><br>
 공고기한 : <%=@post.recruitdate%><br>
 관련 사이트 : <%=link_to @post.weblink, @post.weblink%></h4>
-<%if @post.user == current_user%>
-    <%=link_to '수정', edit_post_path%>
-    <%=link_to '삭제', post_path, method: :delete%>
-<%end%>
-    <%=link_to '목록', root_path%>
 <hr>
 
 <%=@post.content.html_safe%>
@@ -17,8 +12,7 @@
         <%=bootstrap_form_for(@comment, url: post_comments_path(@post)) do |f|%>
             <%=f.hidden_field :user_id, value: current_user.id%>
             <%=f.hidden_field :post_id, value: @post.id%>
-            <%=f.text_field :content, label: "댓글"%>
-            <%=f.submit '작성'%>
+            <%=f.text_field :content, label: "댓글", append: f.submit('작성', class: "btn btn-secondary") %>
         <%end%>
     <%else%>
         <%=link_to '댓글을 다시려면 로그인을 해주세요!', new_user_session_path%>
@@ -28,13 +22,18 @@
 <%@comments.each do |c|%>
     <div class="media">
         <div class="media-body">
-            <div class="media-heading">
-                <strong><%=c.user.email%></strong>
-            </div>
+                <strong>by </strong><%=c.user.email%>, <strong><%= time_ago_in_words(c.created_at) %> 전
+                <%if c.user == current_user%>
+                    <%=link_to '[x]', post_comment_path(@post, c), method: :delete%></strong>
+                <%end%>
+            <br> 
             <%=c.content%>
-            <%if c.user == current_user%>
-                <%=link_to '[x]', post_comment_path(@post, c), method: :delete%>
-            <%end%>
         </div>
     </div>
 <%end%>
+<hr>
+<%if @post.user == current_user%>
+    <%=link_to '수정', edit_post_path%>
+    <%=link_to '삭제', post_path, method: :delete%>
+<%end%>
+    <%=link_to '목록', root_path%>

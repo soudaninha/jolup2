@@ -4,7 +4,12 @@ class PostsController < ApplicationController
   before_action :is_writer?, only: [:edit, :update, :destroy]
   
   def index
-    @posts = Post.order(created_at: :DESC) # 최신글 먼저
+    @posts = Post.all
+    if params[:search]
+      @posts = Post.search(params[:search]).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    else
+      @posts = Post.all.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+    end
   end
 
   def new
@@ -23,7 +28,7 @@ class PostsController < ApplicationController
   
   def show
     @comment = Comment.new
-    @comments = @post.comments
+    @comments = @post.comments.order(created_at: :DESC)
   end
 
   def edit

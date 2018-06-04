@@ -1,4 +1,12 @@
 <h1>목록 페이지</h1>
+
+<div class="input-group">
+  <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Type and Enter to Search", :style => "width: 210px;", class: "form-control" %>
+    <%= submit_tag "Search", :style => "display: none;" %>
+  <% end %>
+</div>
+
 <div class="table-responsive">
     <table class="table table-fit">
         <thead>
@@ -18,5 +26,6 @@
                 <%end%>
         </tbody>
     </table>
+    <%= will_paginate @posts, :previous_label => t("previous"), :next_label => t("next") %>
 </div>
 
