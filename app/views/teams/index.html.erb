@@ -1,0 +1,26 @@
+<h1>팀 목록 페이지</h1>
+
+<br />
+
+<div class="table-responsive">
+    <table class="table table-fit">
+        <thead>
+            <tr>
+                <th>팀 이름</th>
+                <th>게시글 수</th>
+                <th>마감기한</th>
+            </tr>
+        </thead>
+        <tbody>
+                <% @teams.each do |team|%>
+                    <tr>
+                        <td><%=link_to team.title, team_path(team.id)%></td>
+                        <td><%=team.teamrefs.count%></td>
+                        <td><%=team.deadline%></td>
+                    </tr>
+                <%end%>
+        </tbody>
+    </table>
+    <%= will_paginate @teams, :previous_label => t("previous"), :next_label => t("next") %>
+    <p class="link_to"><%=link_to '새 팀 만들기', new_team_path%></p>
+</div>

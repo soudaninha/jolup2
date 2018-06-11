@@ -1,0 +1,35 @@
+<h1><strong><%=@team.title%></strong> until <%=@team.deadline%></h1>
+<h4>나중에 팀원 정보 넣기</h4>
+
+<hr>
+
+<div class="well">
+    <%if user_signed_in?%>
+        <%=bootstrap_form_for(@teamref, url: team_teamrefs_path(@team)) do |f|%>
+            <%=f.hidden_field :user_id, value: current_user.id%>
+            <%=f.hidden_field :team_id, value: @team.id%>
+            <%=f.text_field :content, label: "팀 게시글", append: f.submit('작성', class: "btn btn-secondary") %>
+        <%end%>
+    <%else%>
+        <%=link_to '팀원에게 전할 말이 있다면 로그인을 해주세요!', new_user_session_path%>
+    <%end%>
+</div>
+<hr />
+<%@teamrefs.each do |c|%>
+    <div class="media">
+        <div class="media-body">
+                <strong>by </strong><%=c.user.username%>, <strong><%= time_ago_in_words(c.created_at) %> 전
+                <%if c.user == current_user%>
+                    <%=link_to '[x]', team_teamref_path(@team, c), method: :delete%></strong>
+                <%end%>
+            <br> 
+            <%=c.content%>
+        </div>
+    </div>
+<%end%>
+<hr>
+<%if @team.user == current_user%>
+    <%=link_to '수정', edit_team_path%>
+    <%=link_to '삭제', team_path, method: :delete%>
+<%end%>
+    <%=link_to '목록', root_path%>

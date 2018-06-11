@@ -15,6 +15,7 @@
 //= require bootstrap-sprockets
 //= require tinymce
 //= require turbolinks
+//= require magicsuggest
 //= require_tree .
 
 (function() {

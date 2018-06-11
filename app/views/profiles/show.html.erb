@@ -1,0 +1,43 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/js/tether.min.js"></script>
+<div class="container">
+    <div class="well profile center">
+            <div class="col-sm-12">
+                    <h2><%=@profile.user.username%> 님의 프로필</h2> 
+                    <p><strong>직무: </strong> <%@profile.workcates.each do |e|%> <span class="tags"><%=e.name%> </span> <%end%> </p>
+                    <p><strong>전문기술: <%@profile.profcates.each do |e|%> <span class="tags"><%=e.name%> </span> <%end%>
+                    <p><strong>관심분야: </strong> <%@profile.interestcates.each do |e|%> <span class="tags"><%=e.name%> </span> <%end%> </p>
+                    <p><strong>관심공모전: <%@profile.eventcates.each do |e|%> <span class="tags"><%=e.name%> </span> <%end%>
+                    <p><strong>웹사이트: </strong><%=link_to @profile.webpage, @profile.webpage%></p>
+                    <p><strong>자기소개: </strong><%=@profile.introduce.html_safe%></p>
+            </div>
+            <div class="col-sm-12"><%if @profile.user == current_user%>
+                <p class="link_to"> <%=link_to '프로필 수정', edit_profile_path%></p>
+                <p class="link_to"> // </p>
+                <p class="link_to"> <%=link_to '로그인 정보 수정', edit_user_registration_path%></p> <%end%></div>    
+    	 
+
+<div class="col-xs-12 divider text-center">
+    <div class="col-xs-12 col-sm-4 emphasis">
+        <h2><strong> 2 </strong></h2>                    
+        <button class="btn btn-info btn-block"><span class="fa fa-user" data-toggle="tooltip" data-placement="bottom" data-html="true" data-trigger='hover click'
+        title="111<br>111"> 프로젝트 횟수 </button>
+    </div>
+    <div class="col-xs-12 col-sm-4 emphasis">
+        <h2><strong> 1 </strong></h2>                    
+        <button class="btn btn-info btn-block"><span class="fa fa-user" data-toggle="tooltip" data-placement="bottom" data-html="true"
+        > 수상 횟수 </button>
+    </div>
+    <div class="col-xs-12 col-sm-4 emphasis">
+        <h2><strong> 4.5 </strong></h2>                    
+        <button class="btn btn-info btn-block"><span class="fa fa-user" data-toggle="tooltip" data-placement="bottom" data-html="true"
+        > 평가 </button>
+    </div>
+</div>
+	</div>
+</div>
+
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>

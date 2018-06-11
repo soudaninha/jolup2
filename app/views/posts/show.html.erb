@@ -1,7 +1,14 @@
-<h1><strong><%=@post.title%></strong> by <%=@post.user.email%></h1>
+<p>
+    <%@post.interestcates.each do |e|%>
+        <span class="tags"><%=e.name%></span>
+    <%end%>
+</p>
+                    
+<h1><strong><%=@post.title%></strong> by <%=link_to @post.user.username, profile_path(@post.user) %></h1>
 <h4>공모기한 : <%=@post.eventdate%><br>
 공고기한 : <%=@post.recruitdate%><br>
-관련 사이트 : <%=link_to @post.weblink, @post.weblink%></h4>
+관련 사이트 : <%=link_to @post.weblink, @post.weblink%><br>
+포스터 : <%=image_tag @post.s3_file_url(:thumb).to_s %></h4>
 <hr>
 
 <%=@post.content.html_safe%>
@@ -22,7 +29,7 @@
 <%@comments.each do |c|%>
     <div class="media">
         <div class="media-body">
-                <strong>by </strong><%=c.user.email%>, <strong><%= time_ago_in_words(c.created_at) %> 전
+                <strong>by </strong><%=c.user.username%>, <strong><%= time_ago_in_words(c.created_at) %> 전
                 <%if c.user == current_user%>
                     <%=link_to '[x]', post_comment_path(@post, c), method: :delete%></strong>
                 <%end%>

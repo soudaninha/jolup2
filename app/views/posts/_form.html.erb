@@ -1,11 +1,30 @@
 <%=bootstrap_form_for @post do |f|%>
     <%=f.hidden_field :user_id, value: current_user.id%>
     <%=f.text_field :title, label: "제목"%><br>
+    <%=f.collection_select :eventcate_id, Eventcate.all, :id, :name, :prompt => "카테고리 선택" %>
+    <%=f.fields_for :interestcates do |interestcates|%>
+        <%=interestcates.text_field :name, label: "관련분야", id: "magicsuggest_i", data: {icate: @icates}, value: nil %>
+    <%end%>
     <%=f.date_select :eventdate, use_month_numbers: :true,  label: "공모기한"%> 
     <%=f.date_select :recruitdate, use_month_numbers: :true, label: "구인기한"%><br>
     <%=f.url_field :weblink, label: "관련 사이트"%><br>
     <%=f.text_area :content, label: "내용", :class => "tinymce",
     :rows => 10, :cols => 120 %><br>
+    <%=f.file_field :s3_file, label: "썸네일", accept: 'image/*'%>
     <%=f.submit '작성'%>
     <%= tinymce %>
 <%end%>
+
+<script>
+dataofi = $('#magicsuggest_i').data('icate');
+$(function() {
+    $('#magicsuggest_i').magicSuggest({
+      cls: '',
+      method: 'get',
+      data: dataofi,
+      allowFreeEntries: false,
+      expandOnFocus: true,
+      hideTrigger: true
+    });
+  });
+</script>

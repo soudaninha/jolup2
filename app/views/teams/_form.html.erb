@@ -1,0 +1,6 @@
+<%=bootstrap_form_for @team do |f|%>
+    <%=f.hidden_field :user_id, value: current_user.id%>
+    <%=f.text_field :title, label: "팀 이름"%><br>
+    <%=f.date_select :deadline, use_month_numbers: :true,  label: "마감기한"%> 
+    <%=f.submit '작성'%>
+<%end%>

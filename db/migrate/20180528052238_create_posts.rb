@@ -6,7 +6,9 @@ class CreatePosts < ActiveRecord::Migration
       t.date :eventdate
       t.date :recruitdate
       t.string :weblink
+      t.string :s3_file
       t.references :user, index: true, foreign_key: true
+      t.references :eventcate, index: true, foreign_key: true
 
       t.timestamps null: false
     end

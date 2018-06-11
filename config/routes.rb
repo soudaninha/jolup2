@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
+
   get 'tinymce_assets/create'
 
   root 'posts#index'
   get 'home/index'
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
   
   get '/new_notifications/read_all' => 'new_notifications#read_all'
   post '/tinymce_assets' => 'tinymce_assets#create'
@@ -16,6 +17,12 @@ Rails.application.routes.draw do
       get :search
     end
   end
+  
+  resources :teams do
+    resources :teamrefs, only: [:create, :destroy]
+  end
+  
+  resources :profiles
   
   get 'posts/search' => 'posts#search'
   

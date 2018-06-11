@@ -1,0 +1,77 @@
+<%=bootstrap_form_for @profile do |f|%>
+    <%=f.hidden_field :user_id, value: current_user.id%>
+    <%=f.text_field :name, label: "이름" %><br>
+    <label class="control-label">성별</label>
+    <%=f.radio_button :sex, true, label: "여성" %>
+    <%=f.radio_button :sex, false, label: "남성" %>
+    <%=f.date_select :birthdate, use_month_numbers: :true, :start_year => Date.current.year, :end_year => 1900, label: "생년월일"%><br>
+    <%=f.phone_field :phone, label: "전화번호"%><br>
+    <%=f.url_field :webpage, label: "웹사이트"%><br>
+    <%=f.fields_for :workcates do |workcates|%>
+        <%=workcates.text_field :name, label: "직무", id: "magicsuggest_w", data: {wcate: @wcates}, value: nil %>
+    <%end%>
+    <%=f.fields_for :profcates do |profcates|%>
+        <%=profcates.text_field :name, label: "전문기술", id: "magicsuggest_p", data: {pcate: @pcates}, value: nil %>
+    <%end%>
+    <%=f.fields_for :interestcates do |interestcates|%>
+        <%=interestcates.text_field :name, label: "관심분야", id: "magicsuggest_i", data: {icate: @icates}, value: nil %>
+    <%end%>
+    <%=f.fields_for :eventcates do |eventcates|%>
+        <%=eventcates.text_field :name, label: "관심공모전", id: "magicsuggest_e", data: {ecate: @ecates}, value: nil %>
+    <%end%>
+    <%=f.number_field :eventnum, label: "공모전 참여 횟수"%><br>
+    <%=f.text_area :introduce, label: "자기소개", :class => "tinymce",
+    :rows => 5, :cols => 120 %><br>
+    <%=f.submit '작성'%>
+    <%= tinymce %>
+<%end%>
+
+<script>
+dataofi = $('#magicsuggest_i').data('icate');
+$(function() {
+    $('#magicsuggest_i').magicSuggest({
+      cls: '',
+      method: 'get',
+      data: dataofi,
+      allowFreeEntries: false,
+      expandOnFocus: true,
+      hideTrigger: true
+    });
+  });
+  
+dataofe = $('#magicsuggest_e').data('ecate');
+$(function() {
+    $('#magicsuggest_e').magicSuggest({
+      cls: '',
+      method: 'get',
+      data: dataofe,
+      allowFreeEntries: false,
+      expandOnFocus: true,
+      hideTrigger: true
+    });
+  });
+  
+dataofw = $('#magicsuggest_w').data('wcate');
+$(function() {
+    $('#magicsuggest_w').magicSuggest({
+      cls: '',
+      method: 'get',
+      data: dataofw,
+      allowFreeEntries: false,
+      expandOnFocus: true,
+      hideTrigger: true
+    });
+  });
+  
+dataofp = $('#magicsuggest_p').data('pcate');
+$(function() {
+    $('#magicsuggest_p').magicSuggest({
+      cls: '',
+      method: 'get',
+      data: dataofp,
+      allowFreeEntries: false,
+      expandOnFocus: true,
+      hideTrigger: true
+    });
+  });
+</script>

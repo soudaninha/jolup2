@@ -27,6 +27,15 @@ gem 'devise-i18n'
 # 알림
 gem 'unread'
 
+# 조회수
+gem 'impressionist'
+
+# 개인정보 보호
+gem 'paranoia'
+
+#
+gem 'magic_suggest'
+
 # 검색 기능
 gem 'sunspot_rails'
 gem 'sunspot_solr'

@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:comment][:post_id])
     
     unless @post.user == current_user # 본인 글에 본인이 댓글 달면 알람 안가게
-      @new_notification = NewNotification.create! user: @post.user, content: "#{current_user.email}님이 댓글을 달았습니다.", link: post_path(@post)
+      @new_notification = NewNotification.create! user: @post.user, content: "#{current_user.username}님이 댓글을 달았습니다.", link: post_path(@post)
     end
     
     if @comment.save

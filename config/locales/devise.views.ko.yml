@@ -25,6 +25,7 @@ ko:
         unconfirmed_email: "확인되지 않은 이메일 주소"
         unlock_token: "잠금해제 토큰"
         updated_at: "업데이트된 시간"
+        username: "닉네임"
     models:
       user: "사용자"
   devise:
