@@ -95,3 +95,8 @@ profname.each do |x|
     Profcate.create(name: x) # 전문기술
 end
 
+
+(1...10).each do |x|
+    User.create(email: "t#{x}@t.t", username: "tester#{x}", password: "123456")
+    Profile.create(user_id: x)
+end

@@ -5,10 +5,11 @@ class TeamsController < ApplicationController
   before_action :is_writer?, only: [:edit, :update, :destroy]
   
   def index
-    @teams = Team.all.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+    @teams = Team.where(user_id: current_user.id).order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
   end
   
   def show
+    @member = Member.new
     @teamref = Teamref.new
     @teamrefs = @team.teamrefs.order(created_at: :DESC)
   end
@@ -21,6 +22,7 @@ class TeamsController < ApplicationController
     @team = Team.create(team_params)
     
     if @team.save
+      @member = Member.create(user_id: current_user.id, username: current_user.username, team_id: @team.id, workname: "팀장")
       redirect_to @team
     else
       flash[:alert] = "게시물을 작성할 수 없습니다."

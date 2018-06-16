@@ -1,6 +1,45 @@
-<h1><strong><%=@team.title%></strong> until <%=@team.deadline%></h1>
-<h4>나중에 팀원 정보 넣기</h4>
+<h1><strong><%=@team.title%> 팀</strong> until <%=@team.deadline%></h1>
+<br>
+<div class="table-responsive">
+    <table class="table table-fit">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>닉네임</th>
+                <th>역할</th>
+                <th>평가</th>
+                <th>삭제</th>
+            </tr>
+        </thead>
+        <tbody>
+                <% c = 1 %>
+                <% @team.members.each do |m|%>
+                    <tr>
+                        <td><%=c%></td>
+                        <td><%=link_to m.username, profile_path(m.user_id)%></td>
+                        <td><%=m.workname%></td>
+                        <td>평가하기</td>
+                        <%if m.user_id == current_user.id %>
+                            <td></td>
+                        <%else%>
+                            <td><%=link_to '[X]', member_path(m.id), method: :delete%> </td>
+                        <%end%>
+                        <%c=c+1%>
+                    </tr>
+                <%end%>
+        </tbody>
 
+    </table>
+
+<div class="form-team">
+<%=bootstrap_form_for @member, html: {class:"form-inline"} do |f|%>
+    <%=f.hidden_field :team_id, value: @team.id%>
+    <%=f.hidden_field :user_id, value: nil%>
+    <%=f.text_field :username, label: "새로운 멤버 추가", placeholder: "유저 닉네임", style: "margin-left: 5px;"%>
+    <%=f.text_field :workname, label: "", hide_label: true, placeholder: "역할", append: f.submit('추가', class: "btn btn-secondary")%>
+<%end%>
+</div>
+<br><br>
 <hr>
 
 <div class="well">
@@ -15,20 +54,22 @@
     <%end%>
 </div>
 <hr />
+<%rc=1%>
 <%@teamrefs.each do |c|%>
     <div class="media">
         <div class="media-body">
-                <strong>by </strong><%=c.user.username%>, <strong><%= time_ago_in_words(c.created_at) %> 전
+            <strong><%=rc%>) </strong><%rc=rc+1%>
+            <%=c.content%>
+            <strong> by </strong><%=c.user.username%>, <strong><%= time_ago_in_words(c.created_at) %> 전
                 <%if c.user == current_user%>
                     <%=link_to '[x]', team_teamref_path(@team, c), method: :delete%></strong>
                 <%end%>
-            <br> 
-            <%=c.content%>
+            <br>
         </div>
     </div>
 <%end%>
 <hr>
-<%if @team.user == current_user%>
+<%if @team.users == current_user%>
     <%=link_to '수정', edit_team_path%>
     <%=link_to '삭제', team_path, method: :delete%>
 <%end%>

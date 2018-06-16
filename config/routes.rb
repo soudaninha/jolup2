@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get 'posts/search' => 'posts#search'
   
   resources :new_notifications, only: [:index, :show, :create]
-  
+  resources :members, only: [:create, :destroy]
   
  resources :conversations, only: [:create] do
     member do

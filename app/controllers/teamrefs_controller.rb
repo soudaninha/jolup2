@@ -7,9 +7,9 @@ class TeamrefsController < ApplicationController
     @teamref = Teamref.new(teamref_params)
     @team = Team.find(params[:teamref][:team_id])
     
-    unless @team.user == current_user # 본인 글에 본인이 댓글 달면 알람 안가게
-      @new_notification = NewNotification.create! user: @team.user, content: "#{current_user.username}님이 팀 게시판에 새 글을 달았습니다.", link: team_path(@team)
-    end
+    # unless @team.users == current_user # 본인 글에 본인이 댓글 달면 알람 안가게
+    #   @new_notification = NewNotification.create! users: @team.users, content: "#{current_user.username}님이 팀 게시판에 새 글을 달았습니다.", link: team_path(@team)
+    # end
     
     if @teamref.save
       redirect_to :back

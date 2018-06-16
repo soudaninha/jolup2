@@ -1,7 +1,9 @@
 class Team < ApplicationRecord
     
     has_many :teamrefs
-    belongs_to :user
+    has_many :members
+    has_many :users, through: :members, dependent: :destroy
+    validates_associated :members # More on this later
     
     validates :title, presence: true, length: {minimum: 1}
     

@@ -5,11 +5,16 @@ class User < ActiveRecord::Base
   
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
-         
+  
+  validates :username, presence: :true, uniqueness: { case_sensitive: false }
+  
   has_many :posts
-  has_many :teams
+  has_many :members
+  has_many :teams, through: :members, dependent: :destroy
   has_many :comments
   has_many :new_notifications
+  
+  validates_associated :members # More on this later
   
   has_many :messages
   has_many :conversations, foreign_key: :sender_id

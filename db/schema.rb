@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180611154630) do
+ActiveRecord::Schema.define(version: 20180616035522) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "content"
@@ -93,6 +93,17 @@ ActiveRecord::Schema.define(version: 20180611154630) do
     t.integer "profile_id",      null: false
   end
 
+  create_table "members", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "team_id"
+    t.text     "username"
+    t.text     "workname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_members_on_team_id"
+    t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.text     "body"
     t.integer  "user_id"
@@ -144,15 +155,15 @@ ActiveRecord::Schema.define(version: 20180611154630) do
     t.string   "phone"
     t.boolean  "sex"
     t.string   "name"
-    t.integer  "eventnum"
+    t.integer  "eventnum",   default: 0
     t.text     "eventname"
-    t.integer  "awardnum"
+    t.integer  "awardnum",   default: 0
     t.text     "awardname"
     t.text     "introduce"
     t.string   "webpage"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
