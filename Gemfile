@@ -12,6 +12,9 @@ gem 'devise-bootstrap-views'
 gem 'tinymce-rails'
 gem 'tinymce-rails-imageupload', '~> 4.0.0.beta'
 
+# AWS SDK
+gem 'aws-sdk-rails'
+
 # carrierwave - 이미지, 파일 등 업로더
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'

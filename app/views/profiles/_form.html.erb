@@ -19,7 +19,10 @@
     <%=f.fields_for :eventcates do |eventcates|%>
         <%=eventcates.text_field :name, label: "관심공모전", id: "magicsuggest_e", data: {ecate: @ecates}, value: nil %>
     <%end%>
-    <%=f.number_field :eventnum, label: "공모전 참여 횟수"%><br>
+    <%=f.number_field :eventnum, label: "프로젝트 참여 횟수"%><br>
+    <%=f.text_field :eventname, label: "프로젝트내역", placeholder: "쉼표로 구분하여 간단히 기입해주세요." %><br>
+    <%=f.number_field :awardnum, label: "수상 횟수"%><br>
+    <%=f.text_field :awardname, label: "수상내역", placeholder: "쉼표로 구분하여 간단히 기입해주세요." %><br>
     <%=f.text_area :introduce, label: "자기소개", :class => "tinymce",
     :rows => 5, :cols => 120 %><br>
     <%=f.submit '작성'%>

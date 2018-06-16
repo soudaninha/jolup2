@@ -23,5 +23,9 @@ module Workspace
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.i18n.default_locale = :ko
+    
+    # 환경에 상관 없이 action_mailer에서 aws_sdk 사용함
+    config.action_mailer.delivery_method = :aws_sdk
+    
   end
 end

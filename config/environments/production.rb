@@ -76,4 +76,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  
+  # 아직은 아님
+  # 배포 단계의 액션 메일러 설정
+  # config.action_mailer.default_url_options = { host: 'heroku-app', port: 80 }
+  
 end

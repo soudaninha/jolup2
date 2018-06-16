@@ -38,4 +38,10 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  
+  	# 개발 단계의 액션 메일러 설정
+  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'https://joljak2-soudaninha.c9users.io'} #이러면 에러 안남
+  #config.action_mailer.default_url_options = { host: '서버 런 하고 난 뒤의 주소', port: 80 } #이건 에러 주의
+  
 end

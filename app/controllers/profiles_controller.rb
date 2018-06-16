@@ -49,6 +49,8 @@ class ProfilesController < ApplicationController
   end
 
   def show
+    @ename = @profile.eventname.split(",")
+    @aname = @profile.awardname.split(",")
   end
   
   private
@@ -57,7 +59,8 @@ class ProfilesController < ApplicationController
   end
   
   def profile_params
-    params.require(:profile).permit(:user_id, :birthdate, :phone, :sex, :name, :eventnum, :introduce, :webpage)
+    params.require(:profile).permit(
+      :user_id, :birthdate, :phone, :sex, :name, :eventnum, :eventname, :awardnum, :awardname, :introduce, :webpage)
   end
   
   def is_writer? #update/edit

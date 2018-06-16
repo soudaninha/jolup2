@@ -3,8 +3,9 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   acts_as_reader
   
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
+         
   has_many :posts
   has_many :teams
   has_many :comments

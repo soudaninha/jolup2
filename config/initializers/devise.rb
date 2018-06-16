@@ -18,7 +18,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'lmvickyhi@gmail.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -129,7 +129,8 @@ Devise.setup do |config|
   # able to access the website for two days without confirming their account,
   # access will be blocked just in the third day. Default is 0.days, meaning
   # the user cannot access the website without confirming their account.
-  # config.allow_unconfirmed_access_for = 2.days
+   config.allow_unconfirmed_access_for = 2.days
+  # 이메일 인증 안해도 접근 가능
 
   # A period that the user is allowed to confirm their account before their
   # token becomes invalid. For example, if set to 3.days, the user can confirm
@@ -143,7 +144,7 @@ Devise.setup do |config|
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed, new email is stored in
   # unconfirmed_email column, and copied to email column on successful confirmation.
-  config.reconfirmable = true
+  config.reconfirmable = false # 이메일 인증은 1번하면 못바꿈
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [:email]
